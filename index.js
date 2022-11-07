@@ -13,6 +13,7 @@ app.use(express.json())
 app.use('/patient', require('./routes/patientRoutes'))
 app.use('/doctor', require('./routes/doctorRoutes'))
 app.use('/transcript', require('./routes/transcriptRoutes'))
+app.use('/appointment', require('./routes/appointmentRoutes'))
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })

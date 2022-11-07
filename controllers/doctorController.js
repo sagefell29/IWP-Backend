@@ -73,15 +73,43 @@ const getDoctor = async (req, res) => {
 
 const getDoctorBySpecialization = async (req, res) => {
   try {
-    const {specialization} = req.body
-    const doctors = await Doctor.find({specialization}).select('-password')
-    if (!doctors){
-        return res.json({success:false, message:"No doctors found"})
+    const { specialization } = req.body;
+    const doctors = await Doctor.find({ specialization }).select("-password");
+    if (!doctors) {
+      return res.json({ success: false, message: "No doctors found" });
     }
-    res.json({success:true, message:"Doctors found successfully", data:doctors})
+    res.json({
+      success: true,
+      message: "Doctors found successfully",
+      data: doctors,
+    });
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: "Internal Server Error Occured" });
   }
 };
-module.exports = { createDoctor, loginDoctor, getDoctor, getDoctorBySpecialization };
+
+const getallDoctor = async (req, res) => {
+  try {
+    const doctors = await Doctor.find().select("-password");
+    if (!doctors) {
+      return res.json({ success: false, message: "No doctors found" });
+    }
+    res.json({
+      success: true,
+      message: "Doctors found successfully",
+      data: doctors,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: "Internal Server Error Occured" });
+  }
+};
+
+module.exports = {
+  createDoctor,
+  loginDoctor,
+  getDoctor,
+  getDoctorBySpecialization,
+  getallDoctor
+};
